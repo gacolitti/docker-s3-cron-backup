@@ -1,0 +1,37 @@
+# docker-compose.yml
+version: '2'
+
+services:
+  my-backup-unit:
+    image: peterrus/s3-cron-backup
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - S3_BUCKET_URL=s3://gs-backup/
+      - AWS_DEFAULT_REGION=eu-west-1
+      - CRON_SCHEDULE=0 * * * * # run every hour
+      - BACKUP_NAME=docker-volumes-backup
+      - TARGET=/data
+    volumes:
+      - /${HOME}/grower_success_portal:/data/grower_success_portal:ro # use ro to make sure the volume gets mounted read-only
+      - fieldin-automated-slides-bookmarks:/data/fieldin-automated-slides-bookmarks:ro
+      - fieldin-data-fetcher-bookmarks:/data/fieldin-data-fetcher-bookmarks:ro
+      - grower_success_portal_influxdb_data:/data/influxdb_data:ro
+      - grower_success_portal_r_libraries:/data/r_libraries:ro
+      - grower_success_portal_py_environment:/data/py_environment:ro
+      - grower_success_portal_pwsh_modules:/data/pwsh_modules:ro
+    restart: always
+
+volumes:
+  fieldin-automated-slides-bookmarks:
+    external: true
+  fieldin-data-fetcher-bookmarks:
+    external: true
+  grower_success_portal_influxdb_data:
+    external: true
+  grower_success_portal_r_libraries:
+    external: true
+  grower_success_portal_py_environment:
+    external: true
+  grower_success_portal_pwsh_modules:
+    external: true
