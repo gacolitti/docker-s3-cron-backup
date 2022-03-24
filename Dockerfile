@@ -1,5 +1,11 @@
 FROM alpine:3.15
 
+# Change timezone
+RUN apk add tzdata
+RUN cp /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
+RUN echo "America/Los_Angeles" > /etc/timezone
+RUN apk del tzdata
+
 COPY entrypoint.sh /
 COPY dobackup.sh /
 
