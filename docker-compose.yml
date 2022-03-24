@@ -16,11 +16,11 @@ services:
       - BACKUP_NAME=docker-volumes-backup
       - TARGET=/data
     volumes:
-      - /${HOME}/grower_success_portal:/data/grower_success_portal:ro # use ro to make sure the volume gets mounted read-only
+      - /${HOME}/grower_success_portal:/data/grower_success_portal:ro
       - fieldin-automated-slides-bookmarks:/data/fieldin-automated-slides-bookmarks:ro
       - fieldin-data-fetcher-bookmarks:/data/fieldin-data-fetcher-bookmarks:ro
       - grower_success_portal_influxdb_data:/data/influxdb_data:ro
-      - grower_success_portal_r_libraries:/data/r_libraries:ro
+      # - grower_success_portal_r_libraries:/data/r_libraries:ro
       - grower_success_portal_py_environment:/data/py_environment:ro
       - grower_success_portal_pwsh_modules:/data/pwsh_modules:ro
       - /${HOME}/logs:/logs
