@@ -12,7 +12,7 @@ services:
       - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
       - S3_BUCKET_URL=s3://gs-backup/
       - AWS_DEFAULT_REGION=eu-west-1
-      - CRON_SCHEDULE=0 * * * * # run every hour
+      - CRON_SCHEDULE=0 0 * * *
       - BACKUP_NAME=docker-volumes-backup
       - TARGET=/data
     volumes:
