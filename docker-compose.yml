@@ -3,7 +3,10 @@ version: '2'
 
 services:
   my-backup-unit:
-    image: peterrus/s3-cron-backup
+    container_name: s3-backup
+    build:
+     context: .
+     dockerfile: Dockerfile
     environment:
       - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
       - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
@@ -20,6 +23,7 @@ services:
       - grower_success_portal_r_libraries:/data/r_libraries:ro
       - grower_success_portal_py_environment:/data/py_environment:ro
       - grower_success_portal_pwsh_modules:/data/pwsh_modules:ro
+      - /${HOME}/logs:/logs
     restart: always
 
 volumes:
